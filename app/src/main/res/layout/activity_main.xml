@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_404"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+    <!--显示完整表达式栏-->
+    <TextView
+        android:id="@+id/screen_0"
+        style="@style/TextStyle"
+        android:layout_weight="4"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeStepGranularity="4sp"
+        android:autoSizeTextType="uniform"
+        android:background="#66FFFFFF"
+        android:textSize="40sp" />
+
+    <!--临时表达式及结果栏-->
+    <TextView
+        android:id="@+id/screen_1"
+        style="@style/TextStyle"
+        android:layout_weight="5"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="70sp"
+        android:autoSizeMinTextSize="20sp"
+        android:autoSizeStepGranularity="4sp"
+        android:autoSizeTextType="uniform"
+        android:background="#66FFFFFF"
+        android:text="0"
+        android:textSize="70sp" />
+
+    </LinearLayout>
+
+    <!--按钮面板-->
+    <LinearLayout
+        android:id="@+id/buttonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <!--第一行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/clr"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:text="C"
+                android:textColor="#284DCA" />
+
+            <Button
+                android:id="@+id/div"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:text="÷" />
+
+            <Button
+                android:id="@+id/mul"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:text="×" />
+
+            <ImageButton
+                android:id="@+id/back"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <!--第二行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/but_7"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/but_8"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/but_9"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/sub"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:text="－" />
+        </LinearLayout>
+
+        <!--第三行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/but_4"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/but_5"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/but_6"
+                style="@style/ButtonStyle"
+                android:background="@drawable/digit_bg"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/add"
+                style="@style/ButtonStyle"
+                android:background="@drawable/operate_bg"
+                android:text="＋" />
+        </LinearLayout>
+
+        <!--第四五合并行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <!--四五合并行左部分-->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <!--第四行-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/but_1"
+                        style="@style/ButtonStyle"
+                        android:background="@drawable/digit_bg"
+                        android:text="1" />
+
+                    <Button
+                        android:id="@+id/but_2"
+                        style="@style/ButtonStyle"
+                        android:background="@drawable/digit_bg"
+                        android:text="2" />
+
+                    <Button
+                        android:id="@+id/but_3"
+                        style="@style/ButtonStyle"
+                        android:background="@drawable/digit_bg"
+                        android:text="3" />
+                </LinearLayout>
+
+                <!--第五行-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageButton
+                        android:id="@+id/btn_logo"
+                        style="@style/ButtonStyle"
+                        android:src="@drawable/logo"
+                        android:scaleType="center"
+                        android:background="@drawable/digit_bg"/>
+
+                    <Button
+                        android:id="@+id/but_0"
+                        style="@style/ButtonStyle"
+                        android:background="@drawable/digit_bg"
+                        android:text="0" />
+
+                    <Button
+                        android:id="@+id/point"
+                        style="@style/ButtonStyle"
+                        android:background="@drawable/digit_bg"
+                        android:text="." />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--等号-->
+            <Button
+                android:id="@+id/equ"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/equal_bg"
+                android:text="＝"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
