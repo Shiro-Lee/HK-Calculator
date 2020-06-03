@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else
             end = true;
     }
+
 
     public void onClick(View view) {
 
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     else if (last == '.')
                         state = 2;
                     else state = 0;
-                } else if (length == 1) {
+                } else {
                     expression = "0";
                     state = 0;
                 }
@@ -162,12 +164,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.equ:
-                if (state == 1 || state == 2)    //表达是最后不能是运算符、小数点
+                if (state == 1 || state == 2)    //表达式最后不能是运算符、小数点
                     break;
                 else {  //正确计算
                     state = 0;
                     complete = addBrackets(expression); //为负数加上括号的完整表达式
-                    double result = calculate(complete);
+                    double result = calculate(complete) + 0.0;
                     if(divideByZero) {  //除零错误
                         Toast.makeText(this, "除数不能为0！", Toast.LENGTH_SHORT).show();
                         divideByZero = false;
@@ -204,12 +206,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
         textView_1.setText(expression);
 
-        if (expression.equals("416"))
+        if ("416".equals(expression))
             Toast.makeText(this, "指挥官，有我在就足够了。", Toast.LENGTH_LONG).show();
     }
 
 
-    //为表达式中的负数加上括号以便后续处理
+    /*为表达式中的负数加上括号以便后续处理*/
     private String addBrackets(String s) {
         boolean flag = false;   //是否正在添加括号
         if (s.charAt(0) == '-')
@@ -224,7 +226,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     s = s.substring(0, i + 1) + ')' + s.substring(i + 1);
                     flag = false;
                 }
-            } else if (flag) { //表达式末尾加右括号
+            }
+            else if (flag) { //表达式末尾加右括号
                 s += ')';
                 flag = false;
             }
@@ -233,16 +236,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //计算表达式
+    /*计算表达式*/
     private double calculate(String s) {
         double result;
         ArrayList<String> convertList = getStringList(s);
         char ch;
         for(int i=0; i<convertList.size(); i++){
             ch = convertList.get(i).charAt(0);
-            if(Character.isDigit(ch) || convertList.get(i).length()>1){
+            if(Character.isDigit(ch) || convertList.get(i).length()>1)
                 doubleStack.push(Double.parseDouble(convertList.get(i)));
-            }
             else
                 switch (ch){
                     case '+': case'-': case'×': case'÷':
@@ -259,38 +261,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //结果最多保留小数点后9位
+    /*结果最多保留小数点后9位*/
     private String format(double result){
         DecimalFormat df = new DecimalFormat("#.#########");
         return df.format(result);
     }
 
 
-    //将表达式拆解为数字和运算符组成的列表，并返回后缀表达式
+    /*将表达式拆解为数字和运算符组成的列表，并返回后缀表达式*/
     private ArrayList<String> getStringList(String s){
         char current;
         ArrayList<String> strList = new ArrayList<>();
-        String item = "";   //将要被加入ArrayList的数字/运算符
+        StringBuilder item = new StringBuilder(); //将要被加入ArrayList的数字/运算符
         for(int i=0; i<s.length(); i++){
             current = s.charAt(i);
             if(current=='(') {
-                item += '-';
+                item.append('-');
                 i++;
             }
             else if(current=='.' || Character.isDigit(current))
-                item += current;
+                item.append(current);
             else if(current=='+'||current=='-'||current=='×'||current=='÷'){
-                strList.add(item);
+                strList.add(item.toString());
                 strList.add(String.valueOf(current));
-                item = "";
+                item.delete(0,item.length());
             }
         }
-        strList.add(item);
+        strList.add(item.toString());
         return getConvertList(strList);
     }
 
 
-    //中缀表达式转换为后缀表达式
+    /*中缀表达式转换为后缀表达式*/
     private ArrayList<String> getConvertList(ArrayList<String> list){
         Stack<Character> stack = new Stack<>();
         char chs, chl;  //chs表示栈顶运算符，chl表示原列表运算符
@@ -317,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //对运算符op取操作数进行运算
+    /*对运算符op取操作数进行运算*/
     private void doOperate(char op){
         double left, right, value=0;
         right = doubleStack.pop();
@@ -357,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default: return -1;
         }
     }
+
 
     //栈外优先级
     private int outside(char c) {
